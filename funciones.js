@@ -19,7 +19,7 @@ function eliminarRespuestas(preguntaId) {
 
   function eliminarRespuestas2(preguntaId) {
     var pregunta = document.getElementById(preguntaId);
-    var respuestasIncorrectas = pregunta.querySelectorAll("input[type='radio'][value='B'], input[type='radio'][value='D']");
+    var respuestasIncorrectas = pregunta.querySelectorAll("input[type='radio'][value='C'], input[type='radio'][value='D']");
     var respuestasAEliminar = 2;
   
     var posicionesAEliminar = [];
@@ -35,6 +35,25 @@ function eliminarRespuestas(preguntaId) {
       respuestasIncorrectas[posicion].style.display = "none";
     }
   }
+
+  
+  function saltarAPregunta(preguntaId) {
+    
+    const preguntaActual = document.getElementById(preguntaId);
+    preguntaActual.style.display = "none";
+
+    
+    const siguientePreguntaId = "pregunta" + (parseInt(preguntaId.slice(8)) + 1);
+    const siguientePregunta = document.getElementById(siguientePreguntaId);
+    if (siguientePregunta) {
+        siguientePregunta.style.display = "block";
+    } else {
+        
+        alert("¡Has completado la trivia!");
+    }
+}
+
+
 function verificarRespuesta(preguntaId) {
     const pregunta = document.getElementById(preguntaId);
     const opciones = pregunta.querySelectorAll("input[type=radio]");
@@ -84,7 +103,7 @@ function verificarRespuesta(preguntaId) {
     if (respuestaCorrecta) {
         pregunta.style.display = "none";
 
-        // Mostrar la siguiente pregunta si existe
+        
         const siguientePreguntaId = "pregunta" + (parseInt(preguntaId.slice(8)) + 1);
         const siguientePregunta = document.getElementById(siguientePreguntaId);
         if (siguientePregunta) {
@@ -92,7 +111,6 @@ function verificarRespuesta(preguntaId) {
             
         } else {
             
-            // Si no hay más preguntas, se puede mostrar un mensaje o realizar alguna acción final.
             alert("¡Felicidades! has ganado 1 millon de pesos ");
         }
     } else {
